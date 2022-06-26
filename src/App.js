@@ -30,6 +30,17 @@ const sub = (data) =>{
               minLength:19
          })} />
           </div>
+          <div className="form__input1">
+          {/* <MaskedInput
+            id="expiration"
+            type="tel"
+            placeholder="MM/YY"
+            pattern="(1[0-2]|0[1-9])\/(1[5-9]|2\d)"
+            data-valid-example="05/18"
+            label="Credit Card Expiration"
+            //  />; */}
+             {/* https://github.com/estelle/input-masking */}
+          </div>
           <button type='submit'>SEND</button>
       </form>
    </div>
