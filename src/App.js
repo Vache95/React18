@@ -3,10 +3,76 @@ import { useForm } from 'react-hook-form';
 import './App.scss'
 
 export default function App() {
+  console.log("render")
+ const [text,setText] = useState('')
+ const [color,setcolor] = useState(false)
+
+ const handelChange = ()=>{
+  setTimeout(()=>{
+    setText("react18")
+    setcolor(true)
+  },1000)
+ }
 
  return (
    <div className="wrapper">
-  
+     <section className="wrapper__section1">
+      <h1>npm install react@18 react-dom@18</h1>
+     </section>
+     <section className="wrapper__section2">
+      <div className="wrapper__section2-left">
+        <h2>React-17</h2>
+       <code>  
+              import React from 'react';<br/>
+              import ReactDOM from 'react-dom';<br/>
+              import './scss/app.scss';<br/>
+              import App from './App';<br/>
+
+
+
+              ReactDOM.render(<br/>
+                {/* <React.StrictMode><br/>
+
+                      <App/><br/>
+              
+                </React.StrictMode>, */}<br/>
+                document.getElementById('root')<br/>
+              );
+       </code>
+      </div>
+      <div className="wrapper__section2-rigth">
+      <h2>React-18</h2>
+      <code>  
+              import React from 'react';
+              import ReactDOM from 'react-dom';
+              import './scss/app.scss';
+              import App from './App';
+
+
+
+              ReactDOM.render(
+                {/* <React.StrictMode>
+
+                      <App/>
+              
+                </React.StrictMode>, */}
+                document.getElementById('root')
+              );
+       </code>
+      </div>
+     </section>
+     <section className="wrapper__section3">
+      <h2>1 update Batching</h2>
+      <div className="wrapper__section3-top">
+        <button onClick={handelChange}>React17-sinchron</button>
+        <span className={color ? "color" : null}>{`change-${text}`}</span>
+      </div>
+      <div className="wrapper__section3-bottom"></div>
+     </section>
+     <section className="wrapper__section4">
+      <h2>Suspense</h2>
+     </section>
+     <section className="wrapper__section5"></section>
    </div>
   )
 }

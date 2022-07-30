@@ -1,38 +1,80 @@
-.form{
+$sizeh1: 80px;
+$sizeh2:50px;
+// $sizecode
+.wrapper{
+    max-width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+}
+.wrapper__section1{
     width: 100%;
     height: 100%;
-    padding: 20px;
-    button{
-        width: 200px;
-        height: 30px;
-        background: none;
-        background-color: rgb(136, 229, 136);
-        color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+    h1{
         font-family: Arial;
-        margin-left:358px;
+        font-weight: 600;
+        font-size: $sizeh1;
     }
 }
-.form__input1{
-    border:1px solid gray;
+.wrapper__section2{
     width: 100%;
-    height: 30px;
-    margin-bottom: 30px;
-    input{
-        width: 100%;
-        height: 100%;
-        padding-left: 10px;
+    height: 100%;
+    display: flex;
+    background-color: #2B303B;
+    .wrapper__section2-left{
+        padding: 10px;
+        width: 50%;
+        border-right: 3px solid #fff;
+        display: flex;
+        flex-direction: column;
+        h2{
+            text-align: center;
+            font-size: $sizeh2;
+        }
+       code{
+        color:#fff;
+        font-size: 40px;
+        line-height: 1.5;
+       }
+    }
+    .wrapper__section2-rigth{
+        padding: 10px;
+        width: 50%;
+        h2{
+            text-align: center;
+            font-size: $sizeh2;
+        }
     }
 }
-.form__input2{
-    border:1px solid gray;
+.wrapper__section3{
+    padding: 20px;
     width: 100%;
-    height: 30px;
-    margin-bottom: 30px;
-    input{
-        width: 100%;
-        height: 100%;
-        padding-left: 10px;
-        
+    height: 100vh;
+    h2{
+        text-align: center;
+        font-size: $sizeh2;
     }
-
+    .wrapper__section3-top{
+      span{
+        width: 200px;
+        height: 50px;
+        border:1px solid black;
+      }
+      .color{
+        background-color: aquamarine;
+      }
+    }
+}
+.wrapper__section4{
+    padding: 20px;
+    width: 100%;
+    height: 100vh;
+    border:1px solid black;
+    h2{
+        text-align: center;
+        font-size: $sizeh2;
+    }  
 }
