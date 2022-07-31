@@ -1,77 +1,122 @@
-import {React,useState, useEffect, useRef} from 'react';
-import { useForm } from 'react-hook-form';
+import {React,useState,lazy,Suspense} from 'react';
 import './App.scss'
-
+// import MyLazyComponent from './components/MyLazyComponent';
+const MyLazyComponent = lazy(()=> import('./components/MyLazyComponent'))
 export default function App() {
-  console.log("render")
- const [text,setText] = useState('')
- const [color,setcolor] = useState(false)
+ console.log("render")
 
- const handelChange = ()=>{
-  setTimeout(()=>{
-    setText("react18")
-    setcolor(true)
-  },1000)
+// * sinchron
+ const [sinchrontext,setsinchronText] = useState('')
+ const [sinchroncolor,setsinchroncolor] = useState(false)
+// * asynchron
+ const [asynchrontext,setasynchronText] = useState('')
+ const [asynchroncolor,setasynchroncolor] = useState(false)
+// * lazy
+ const [openLazy,setopenLazy] = useState(false)
+
+
+ // * sinchron function
+ const sinchronBatching = () => {
+  setsinchronText("react18")
+  setsinchroncolor(true)
  }
-
+// * asynchron function
+ const acynchronBatching = () => {
+         setTimeout(() => {
+          setasynchronText("react18")
+          setasynchroncolor(true)
+          },1000)
+}
+// * lazy function
+const lazy = () => {
+    setopenLazy(true)
+}
  return (
    <div className="wrapper">
+
+
      <section className="wrapper__section1">
       <h1>npm install react@18 react-dom@18</h1>
      </section>
+
+
      <section className="wrapper__section2">
       <div className="wrapper__section2-left">
         <h2>React-17</h2>
        <code>  
-              import React from 'react';<br/>
-              import ReactDOM from 'react-dom';<br/>
-              import './scss/app.scss';<br/>
-              import App from './App';<br/>
+              <span className='import'>import</span><span className='artibut'> React</span> <span className='import'>from</span><span className='select'> 'react';</span><br/>
+              <span className='import'>import</span><span className='artibut'> ReactDOM</span> <span className='import'>from</span><span className='select'> 'react-dom';</span><br/>
+              <span className='import'>import</span><span className='select'> './scss/app.scss';</span><br/>
+              <span className='import'>import</span><span className='artibut'> App</span> <span className='import'>from</span><span className='select'> './App';</span><br/>
+              <br/>
+              <span className='artibut'>ReactDOM</span>.<span className='render'>render</span><span className='renderskop'>(</span><br/>
+              <span className='mode'>&#10094;React.StrictMode&#10095;</span><br/>
 
-
-
-              ReactDOM.render(<br/>
-                {/* <React.StrictMode><br/>
-
-                      <App/><br/>
+              <span className='mode'>&#10094;/App&#10095;</span><br/>
               
-                </React.StrictMode>, */}<br/>
-                document.getElementById('root')<br/>
-              );
+              <span className='mode'>&#10094;/React.StrictMode&#10095;</span><br/>
+                <span className='artibut'>document</span>.<span className='render'>getElementById</span><span className='renderskop2'>(</span><span className='select'>'root'</span><span className='renderskop2'>)</span><br/>
+                <span className='renderskop'>)</span>;
        </code>
       </div>
       <div className="wrapper__section2-rigth">
       <h2>React-18</h2>
       <code>  
-              import React from 'react';
-              import ReactDOM from 'react-dom';
-              import './scss/app.scss';
-              import App from './App';
+      <span className='import'>import</span><span className='artibut'> React</span> <span className='import'>from</span><span className='select'> 'react';</span><br/>
+              <span className='import'>import</span><span className='artibut'><span className='renderskop'> &#10100;</span> createRoot <span className='renderskop'>&#10101;</span></span> <span className='import'>from</span><span className='select'>'react-dom/client';</span><br/>
+              <span className='import'>import</span><span className='select'> './scss/app.scss';</span><br/>
+              <span className='import'>import</span><span className='artibut'> App </span> <span className='import'>from</span><span className='select'> './App';</span><br/>
+              <br/>
+              <span className='import'>const</span> <span className='artibut'>root</span> = <span className='render'>createRoot</span><span className='renderskop'>(</span><br/>
+                <span className='artibut'>document</span>.<span className='render'>getElementById</span><span className='renderskop2'>(</span><span className='select'>'root'</span><span className='renderskop2'>)</span><br/>
+                <span className='renderskop2'>)</span>;<br/>
 
+                  <span className='artibut'>root</span>.<span className='render'>render</span><span className='renderskop'>(</span><br/>
+                  <span className='mode'>&#10094;React.StrictMode&#10095;</span><br/>
 
+                  <span className='mode'>&#10094;/App&#10095;</span><br/>
 
-              ReactDOM.render(
-                {/* <React.StrictMode>
-
-                      <App/>
-              
-                </React.StrictMode>, */}
-                document.getElementById('root')
-              );
+                  <span className='mode'>&#10094;/React.StrictMode&#10095;</span><br/>
+                  <span className='renderskop'>)</span>;
        </code>
       </div>
      </section>
+
+
      <section className="wrapper__section3">
       <h2>1 update Batching</h2>
       <div className="wrapper__section3-top">
-        <button onClick={handelChange}>React17-sinchron</button>
-        <span className={color ? "color" : null}>{`change-${text}`}</span>
+        <button onClick={sinchronBatching}>React17-sinchron</button>
+        <span className={sinchroncolor ? "color" : null}>{`change-${sinchrontext}`}</span>
       </div>
-      <div className="wrapper__section3-bottom"></div>
+      <div className="wrapper__section3-bottom">
+        <button onClick={acynchronBatching}>React17-asynchron</button>
+        <span className={asynchroncolor ? "color" : null}>{`change-${asynchrontext}`}</span>
+      </div>
      </section>
+
+
      <section className="wrapper__section4">
-      <h2>Suspense</h2>
+      <h2>2 update Suspense</h2>
+       <div className="wrapper__section4-content">
+       <div className="wrapper__section4-left">
+            <button onClick={lazy}>open lazy component</button>
+            {
+              openLazy && <>
+               <Suspense fallback={<h3>Loading...</h3>}>
+                 <MyLazyComponent/>
+               </Suspense>
+              </> 
+            }
+
+       </div>
+         <div className="wrapper__section4-rigth">
+   
+         </div>
+       </div>
      </section>
+
+
      <section className="wrapper__section5"></section>
    </div>
   )

@@ -6,6 +6,7 @@ $sizeh2:50px;
     height: 100vh;
     overflow-x: hidden;
 }
+
 .wrapper__section1{
     width: 100%;
     height: 100%;
@@ -19,6 +20,7 @@ $sizeh2:50px;
         font-size: $sizeh1;
     }
 }
+
 .wrapper__section2{
     width: 100%;
     height: 100%;
@@ -30,25 +32,81 @@ $sizeh2:50px;
         border-right: 3px solid #fff;
         display: flex;
         flex-direction: column;
+        overflow-y: auto;
         h2{
             text-align: center;
             font-size: $sizeh2;
+            margin-bottom: 30px;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
         }
        code{
         color:#fff;
         font-size: 40px;
         line-height: 1.5;
+        .import{
+            color: #B48EAD;
+        }
+        .artibut{
+          color: #BF5F5A;
+        }
+        .select{
+          color: #A3BE89;
+        }
+        .render{
+            color: #96B5B4;
+        }
+        .mode{
+            color:#EBCB76;
+        }
+        .renderskop{
+           color: #FFD700;
+        }
+        .renderskop2{
+           color: #DA70D6;
+        }
        }
     }
     .wrapper__section2-rigth{
         padding: 10px;
         width: 50%;
+        overflow-y: auto;
         h2{
             text-align: center;
             font-size: $sizeh2;
+            margin-bottom: 30px;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        code{
+            color:#fff;
+            font-size: 40px;
+            line-height: 1.5;
+            .import{
+                color: #B48EAD;
+            }
+            .artibut{
+              color: #BF5F5A;
+            }
+            .select{
+              color: #A3BE89;
+            }
+            .render{
+                color: #96B5B4;
+            }
+            .mode{
+                color:#EBCB76;
+            }
+            .renderskop{
+               color: #FFD700;
+            }
+            .renderskop2{
+               color: #DA70D6;
+            }
         }
     }
 }
+
 .wrapper__section3{
     padding: 20px;
     width: 100%;
@@ -56,25 +114,105 @@ $sizeh2:50px;
     h2{
         text-align: center;
         font-size: $sizeh2;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        margin-bottom: 30px;
     }
     .wrapper__section3-top{
+        margin-bottom: 30px;
+        button{
+            background-color: #fff;
+            width: 300px;
+            height: 50px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border:1px solid black;
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-family: Arial;
+        }
       span{
         width: 200px;
         height: 50px;
-        border:1px solid black;
+        font-size: 20px;
+        font-family: Arial;
       }
       .color{
-        background-color: aquamarine;
+        color: orangered;
+      }
+    }
+    .wrapper__section3-bottom{
+        button{
+            background-color: #fff;
+            width: 300px;
+            height: 50px;
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            border:1px solid black;
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-family: Arial;
+        }
+      span{
+        width: 200px;
+        height: 50px;
+        font-size: 20px;
+        font-family: Arial;
+      }
+      .color{
+        color: orangered;
       }
     }
 }
+
 .wrapper__section4{
-    padding: 20px;
     width: 100%;
     height: 100vh;
     border:1px solid black;
+    overflow-y: hidden;
+    .wrapper__section4-content{
+        width: 100%;
+        height: 100%;
+        display: flex;
+    }
     h2{
         text-align: center;
         font-size: $sizeh2;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        margin-bottom: 10px;
     }  
+    .wrapper__section4-left{
+       width: 50%;
+       border:1px solid black;
+       padding: 10px;
+       button{
+        background-color: #fff;
+        width: 300px;
+        height: 50px;
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        border:1px solid black;
+        margin-bottom: 10px;
+        font-size: 20px;
+        font-family: Arial;
+    }
+    h3{
+        font-size: 20px;
+        font-family: Arial; 
+    }
+    }
+    .wrapper__section4-rigth{
+       width: 50%;
+       border:1px solid black;
+       padding: 10px;
+    }
+}
+.lazy{
+    font-size: 20px;
+    font-family: Arial; 
+    color: orangered;
 }
