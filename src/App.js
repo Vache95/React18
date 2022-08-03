@@ -1,4 +1,4 @@
-import {React,useState,lazy,Suspense} from 'react';
+import {React,useState,lazy,Suspense,useEffect,useMemo } from 'react';
 import './App.scss'
 // import MyLazyComponent from './components/MyLazyComponent';
 const MyLazyComponent = lazy(()=> import('./components/MyLazyComponent'))
@@ -14,7 +14,20 @@ export default function App() {
 // * lazy
  const [openLazy,setopenLazy] = useState(false)
 
-
+const [value,setValue] =useState('')
+const [items,setItems] = useState()
+ const onChangeValue = (e) =>{
+  setValue(e.target.value);
+ }
+ const fillterdata = useMemo(()=>{
+    return items.filter(ite => console.log(ite.title.toLowerCase().includes(value)))
+ },[value])
+ 
+  useEffect(()=>{
+   fetch('https://jsonplaceholder.typicode.com/photos')
+  .then(response => response.json())
+  .then(json => setItems(json))
+ },[])
  // * sinchron function
  const sinchronBatching = () => {
   setsinchronText("react18")
@@ -117,7 +130,31 @@ const lazy = () => {
      </section>
 
 
-     <section className="wrapper__section5"></section>
+     <section className="wrapper__section5">
+      <h2>3 concurrent mode</h2>
+      <div className="wrapper__section5-content">
+          <ul className="list1">
+            <li>useTransition</li>
+            <li>startTransition</li>
+            <li>useDeferredValue</li>
+          </ul>
+          <ul className="list2">
+            <li>useSyncExternalStore</li>
+            <li>useInsertionEffect</li>
+            <li>useId</li>
+          </ul>
+      </div>
+      <div className="search__container">
+        <input type="text" placeholder='Search' value={value} onChange={onChangeValue} />
+        <div className="search__option">
+         {
+  items && items.map((e,i)=>{
+            return <span key={i}>{e.title}</span>
+          })
+         }
+        </div>
+      </div>
+     </section>
    </div>
   )
 }
