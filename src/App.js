@@ -1,33 +1,45 @@
-import {React,useState,lazy,Suspense,useEffect,useMemo } from 'react';
+import {React,useState,lazy,Suspense,useEffect,useTransition,useDeferredValue} from 'react';
 import './App.scss'
 // import MyLazyComponent from './components/MyLazyComponent';
 const MyLazyComponent = lazy(()=> import('./components/MyLazyComponent'))
 export default function App() {
  console.log("render")
 
-// * sinchron
+// * sinchron-------------------------------------------------------------------------------
  const [sinchrontext,setsinchronText] = useState('')
  const [sinchroncolor,setsinchroncolor] = useState(false)
-// * asynchron
+
+// * asynchron------------------------------------------------------------------------------
  const [asynchrontext,setasynchronText] = useState('')
  const [asynchroncolor,setasynchroncolor] = useState(false)
-// * lazy
+
+// * lazy-----------------------------------------------------------------------------------
  const [openLazy,setopenLazy] = useState(false)
 
+// * useTransition useDeferredValue---------------------------------------------------------
 const [value,setValue] =useState('')
-const [items,setItems] = useState()
+const [comment,setcomment] = useState([])
+const [isPending,startTransition] = useTransition()
+
  const onChangeValue = (e) =>{
+  // startTransition(()=>{
+  //   setValue(e.target.value);
+  // })
   setValue(e.target.value);
  }
- const fillterdata = useMemo(()=>{
-    return items.filter(ite => console.log(ite.title.toLowerCase().includes(value)))
- },[value])
- 
+const filterSearch = (entites,search) => entites.filter(item => item.title.includes(search))
+
+// const values = useDeferredValue(filterSearch(comment,value))
+
   useEffect(()=>{
    fetch('https://jsonplaceholder.typicode.com/photos')
   .then(response => response.json())
-  .then(json => setItems(json))
+  .then(json => {
+    console.log(json)
+    setcomment(json)
+  })
  },[])
+
  // * sinchron function
  const sinchronBatching = () => {
   setsinchronText("react18")
@@ -56,7 +68,7 @@ const lazy = () => {
      <section className="wrapper__section2">
       <div className="wrapper__section2-left">
         <h2>React-17</h2>
-       <code>  
+       <code>
               <span className='import'>import</span><span className='artibut'> React</span> <span className='import'>from</span><span className='select'> 'react';</span><br/>
               <span className='import'>import</span><span className='artibut'> ReactDOM</span> <span className='import'>from</span><span className='select'> 'react-dom';</span><br/>
               <span className='import'>import</span><span className='select'> './scss/app.scss';</span><br/>
@@ -66,7 +78,7 @@ const lazy = () => {
               <span className='mode'>&#10094;React.StrictMode&#10095;</span><br/>
 
               <span className='mode'>&#10094;/App&#10095;</span><br/>
-              
+
               <span className='mode'>&#10094;/React.StrictMode&#10095;</span><br/>
                 <span className='artibut'>document</span>.<span className='render'>getElementById</span><span className='renderskop2'>(</span><span className='select'>'root'</span><span className='renderskop2'>)</span><br/>
                 <span className='renderskop'>)</span>;
@@ -74,12 +86,14 @@ const lazy = () => {
       </div>
       <div className="wrapper__section2-rigth">
       <h2>React-18</h2>
-      <code>  
+      <code>
       <span className='import'>import</span><span className='artibut'> React</span> <span className='import'>from</span><span className='select'> 'react';</span><br/>
               <span className='import'>import</span><span className='artibut'><span className='renderskop'> &#10100;</span> createRoot <span className='renderskop'>&#10101;</span></span> <span className='import'>from</span><span className='select'>'react-dom/client';</span><br/>
               <span className='import'>import</span><span className='select'> './scss/app.scss';</span><br/>
               <span className='import'>import</span><span className='artibut'> App </span> <span className='import'>from</span><span className='select'> './App';</span><br/>
-              <br/>
+
+Vache Virabyan, [04.08.2022 6:49]
+<br/>
               <span className='import'>const</span> <span className='artibut'>root</span> = <span className='render'>createRoot</span><span className='renderskop'>(</span><br/>
                 <span className='artibut'>document</span>.<span className='render'>getElementById</span><span className='renderskop2'>(</span><span className='select'>'root'</span><span className='renderskop2'>)</span><br/>
                 <span className='renderskop2'>)</span>;<br/>
@@ -119,12 +133,12 @@ const lazy = () => {
                <Suspense fallback={<h3>Loading...</h3>}>
                  <MyLazyComponent/>
                </Suspense>
-              </> 
+              </>
             }
 
        </div>
          <div className="wrapper__section4-rigth">
-   
+
          </div>
        </div>
      </section>
@@ -145,10 +159,13 @@ const lazy = () => {
           </ul>
       </div>
       <div className="search__container">
-        <input type="text" placeholder='Search' value={value} onChange={onChangeValue} />
+        <input type="text" placeholder='Search react17' onChange={onChangeValue} />
         <div className="search__option">
+            {/* {isPending && (
+            <h1>Rendering...</h1>
+          )} */}
          {
-  items && items.map((e,i)=>{
+        filterSearch(comment,value).map((e,i)=>{
             return <span key={i}>{e.title}</span>
           })
          }
@@ -158,73 +175,3 @@ const lazy = () => {
    </div>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import {React,useState, useEffect, useRef} from 'react'
-// import './App.scss'
-
-// export default function App() {
-
-
-//     const [card, setCard] = useState();
-//     const inputCard = useRef();
-  
-//     const handleChange = () => {
-//       const cardValue = inputCard.current.value.replace(/\D/g, '').match(/(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})/);
-//       inputCard.current.value = !cardValue[2]
-//         ? cardValue[1]
-//         : `${cardValue[1]} ${cardValue[2]}${`${
-//             cardValue[3] ? ` ${cardValue[3]}` : ''
-//           }`}${`${cardValue[4] ? ` ${cardValue[4]}` : ''}`}`;
-//       const numbers = inputCard.current.value.replace(/(\D)/g, '');
-//       setCard(numbers);
-//     };
-  
-
-
-//  return (
-//    <div className="wrapper">
-//       <form className='form'>
-//           <div className="form__input1">
-//           <input type="text" ref={inputCard} onChange={handleChange} />
-//             {/* <input type="number" /> */}
-//             {/* <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx"></input> */}
-//           </div>
-//           <div className="form__input2">
-//             <input type="number" />
-//           </div>
-//           <button type='submit'>SEND</button>
-//       </form>
-//    </div>
-//   )
-// }
-
